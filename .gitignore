@@ -1,0 +1,31 @@
+# Node.js dependencies
+node_modules/
+package-lock.json
+
+# Environment variables
+.env
+
+# Image files
+111 (1).jpg
+aaaa.jpg
+doraaa.png
+foto01.jpg
+handsshake.png
+map22.png
+oferta.png
+palmaaa.png
+qika.jpg
+sss.jpg
+sss2222.png
+teli24.png
+web1.png
+
+# Logs and temporary files
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS-specific files
+.DS_Store
+Thumbs.db
