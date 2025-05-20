@@ -128,6 +128,42 @@
             .card-image { height: 100%; }
             .flip-card { height: 250px; }
         }
+        /* Mobile Menu Enhancements */
+        #mobile-menu {
+            transition: transform 0.3s ease-in-out;
+            transform: translateY(-100%);
+            top: 80px; /* Adjust based on header height */
+        }
+        #mobile-menu.active {
+            transform: translateY(0);
+        }
+        #mobile-menu a {
+            font-size: 1.25rem;
+            padding: 1rem;
+            width: 100%;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        #menu-toggle .close-icon {
+            display: none;
+        }
+        #menu-toggle.active .hamburger-icon {
+            display: none;
+        }
+        #menu-toggle.active .close-icon {
+            display: block;
+        }
+        @media (max-width: 768px) {
+            #mobile-menu {
+                position: fixed;
+                left: 0;
+                width: 100%;
+                height: calc(100% - 80px); /* Adjust based on header height */
+                background: linear-gradient(to bottom, #1e40af, #047857);
+                z-index: 40;
+                padding-top: 1rem;
+            }
+        }
     </style>
 </head>
 <body class="font-sans text-gray-800 bg-gradient-to-br from-blue-700 to-green-700">
@@ -144,8 +180,11 @@
             </nav>
             <a href="sell.html" class="bg-yellow-300 text-blue-800 px-4 py-2 rounded-full hover:bg-yellow-400 transition">Sell Your Home</a>
             <button id="menu-toggle" class="md:hidden text-white focus:outline-none">
-                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <svg class="w-8 h-8 hamburger-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+                <svg class="w-8 h-8 close-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                 </svg>
             </button>
         </div>
@@ -201,9 +240,6 @@
 
     <!-- Section Divider -->
     <div class="section-divider"></div>
-
-    <!-- Why Sell to Us Section with Flip Cards -->
-
 
     <!-- Sell Your House Section -->
     <section id="sell-your-house" class="py-24 bg-cover bg-center relative" style="background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1920&auto=format&fit=crop');" data-aos="fade-up">
@@ -331,56 +367,76 @@
         </div>
     </footer>
 
-   <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const sellForm = document.getElementById("sell-your-house-form");
-        if (sellForm && sellForm.tagName === 'FORM') {
-            console.log('Form found: sell-your-house-form', sellForm);
-            sellForm.addEventListener("submit", async function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                console.log('Submit event target:', this);
-                try {
-                    const formData = new FormData(sellForm);
-                    const data = Object.fromEntries(formData.entries());
-                    data.form_type = data.form_type || "Sell Your House";
-                    console.log('Submitting to: /api/submit', 'Data:', data);
-                    const response = await fetch("/api/submit", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                            "Accept": "application/json",
-                        },
-                        body: JSON.stringify(data),
-                        credentials: "same-origin",
-                    });
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! Status: ${response.status} - ${response.statusText}`);
-                    }
-                    const result = await response.json();
-                    if (result.success) {
-                        console.log('Form submitted successfully:', result);
-                        alert("Form submitted successfully! A confirmation email has been sent.");
-                        sellForm.reset();
-                    } else {
-                        console.error('Server error:', result.message);
-                        alert(`Error: ${result.message || "Unknown server error"}`);
-                    }
-                } catch (err) {
-                    console.error("Submission error:", err);
-                    let errorMessage = "An error occurred while submitting the form. Please try again.";
-                    if (err.message.includes("Failed to fetch")) {
-                        errorMessage = "Unable to connect to the server. Please ensure you are online and try again.";
-                    } else if (err.message.includes("HTTP error")) {
-                        errorMessage = `Server error: ${err.message}`;
-                    }
-                    alert(errorMessage);
-                }
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Mobile Menu Toggle
+            const menuToggle = document.getElementById("menu-toggle");
+            const mobileMenu = document.getElementById("mobile-menu");
+
+            menuToggle.addEventListener("click", function() {
+                mobileMenu.classList.toggle("hidden");
+                mobileMenu.classList.toggle("active");
+                menuToggle.classList.toggle("active");
             });
-        } else {
-            console.warn("Form with ID 'sell-your-house-form' not found or not a form element:", sellForm);
-        }
-    });
+
+            // Close menu when a link is clicked
+            document.querySelectorAll("#mobile-menu a").forEach(link => {
+                link.addEventListener("click", () => {
+                    mobileMenu.classList.add("hidden");
+                    mobileMenu.classList.remove("active");
+                    menuToggle.classList.remove("active");
+                });
+            });
+
+            // Form Submission
+            const sellForm = document.getElementById("sell-your-house-form");
+            if (sellForm && sellForm.tagName === 'FORM') {
+                console.log('Form found: sell-your-house-form', sellForm);
+                sellForm.addEventListener("submit", async function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('Submit event target:', this);
+                    try {
+                        const formData = new FormData(sellForm);
+                        const data = Object.fromEntries(formData.entries());
+                        data.form_type = data.form_type || "Sell Your House";
+                        console.log('Submitting to: /api/submit', 'Data:', data);
+                        const response = await fetch("/api/submit", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                                "Accept": "application/json",
+                            },
+                            body: JSON.stringify(data),
+                            credentials: "same-origin",
+                        });
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! Status: ${response.status} - ${response.statusText}`);
+                        }
+                        const result = await response.json();
+                        if (result.success) {
+                            console.log('Form submitted successfully:', result);
+                            alert("Form submitted successfully! A confirmation email has been sent.");
+                            sellForm.reset();
+                        } else {
+                            console.error('Server error:', result.message);
+                            alert(`Error: ${result.message || "Unknown server error"}`);
+                        }
+                    } catch (err) {
+                        console.error("Submission error:", err);
+                        let errorMessage = "An error occurred while submitting the form. Please try again.";
+                        if (err.message.includes("Failed to fetch")) {
+                            errorMessage = "Unable to connect to the server. Please ensure you are online and try again.";
+                        } else if (err.message.includes("HTTP error")) {
+                            errorMessage = `Server error: ${err.message}`;
+                        }
+                        alert(errorMessage);
+                    }
+                });
+            } else {
+                console.warn("Form with ID 'sell-your-house-form' not found or not a form element:", sellForm);
+            }
+        });
     </script>
 </body>
 </html>
