@@ -12,6 +12,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400&family=Montserrat:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <link href="/output.css" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- AOS for animations -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
         /* Custom Animations */
         @keyframes glow {
@@ -163,23 +167,6 @@
         </div>
     </header>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const menuToggle = document.getElementById("menu-toggle");
-            const mobileMenu = document.getElementById("mobile-menu");
-
-            menuToggle.addEventListener("click", function() {
-                mobileMenu.classList.toggle("hidden");
-            });
-
-            document.querySelectorAll("#mobile-menu a").forEach(link => {
-                link.addEventListener("click", () => {
-                    mobileMenu.classList.add("hidden");
-                });
-            });
-        });
-    </script>
-
     <!-- Hero Section -->
     <section id="hero" class="relative bg-cover bg-center h-screen" style="background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1920&auto=format&fit=crop');" data-aos="fade-up">
         <div class="absolute inset-0 bg-gradient-to-b from-blue-700/60 to-green-700/60"></div>
@@ -278,82 +265,102 @@
     <!-- Section Divider -->
     <div class="section-divider"></div>
 
-  <!-- Contact Us Section -->
-  <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Contact Form</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- AOS for animations -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-</head>
-<section class="py-24 bg-gradient-to-br from-blue-700 to-green-700" data-aos="fade-up">
-    <div class="container mx-auto px-6">
-        <form id="basic-contact-form" action="javascript:void(0);" method="post" class="form-box bg-gradient-to-br from-blue-700 to-green-700 backdrop-blur-lg p-6 sm:p-8 rounded-2xl shadow-2xl border border-white/40 max-w-4xl mx-auto" novalidate>
-            <input type="hidden" name="form_type" value="Basic Contact">
-            <div class="container-block form-wrapper">
-                <p class="text-2xl sm:text-3xl font-semibold text-yellow-200 mb-4">Get in Touch</p>
-                <p class="text-white text-sm sm:text-base mb-6">Contact us for a free cash offer today!</p>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-                    <div>
-                        <p class="text-white text-sm sm:text-base">FIRST NAME</p>
-                        <input class="input w-full p-3 sm:p-4 rounded-lg bg-blue-300 text-black placeholder-gray-700 focus:ring-2 focus:ring-yellow-300" name="seller_f_name" id="contact_seller_f_name" placeholder="Enter first name...*" required>
-                    </div>
-                    <div>
-                        <p class="text-white text-sm sm:text-base">LAST NAME</p>
-                        <input class="input w-full p-3 sm:p-4 rounded-lg bg-blue-300 text-black placeholder-gray-700 focus:ring-2 focus:ring-yellow-300" name="seller_l_name" id="contact_seller_l_name" placeholder="Enter last name...*" required>
-                    </div>
-                    <div>
-                        <p class="text-white text-sm sm:text-base">EMAIL</p>
-                        <input class="input w-full p-3 sm:p-4 rounded-lg bg-blue-300 text-black placeholder-gray-700 focus:ring-2 focus:ring-yellow-300" name="seller_email" id="contact_seller_email" type="email" placeholder="Enter email...*" required>
-                    </div>
-                    <div>
-                        <p class="text-white text-sm sm:text-base">PHONE NUMBER</p>
-                        <input class="input w-full p-3 sm:p-4 rounded-lg bg-blue-300 text-black placeholder-gray-700 focus:ring-2 focus:ring-yellow-300" name="seller_phone" id="contact_seller_phone" placeholder="Enter phone number...*" required>
-                    </div>
-                    <div class="sm:col-span-2">
-                        <p class="text-white text-sm sm:text-base">ASKING PRICE</p>
-                        <input class="input w-full p-3 sm:p-4 rounded-lg bg-blue-300 text-black placeholder-gray-700 focus:ring-2 focus:ring-yellow-300" name="house_market_value" id="contact_house_market_value" placeholder="Enter asking price...*" required>
-                    </div>
-                    <div>
-                        <p class="text-white text-sm sm:text-base mb-2">HOA</p>
-                        <div class="flex items-center space-x-4">
-                            <label class="text-white flex items-center space-x-2">
-                                <input type="radio" name="hoa_status" value="Yes" class="form-radio text-yellow-300" required>
-                                <span>Yes</span>
-                            </label>
-                            <label class="text-white flex items-center space-x-2">
-                                <input type="radio" name="hoa_status" value="No" class="form-radio text-yellow-300">
-                                <span>No</span>
-                            </label>
+    <!-- Contact Us Section -->
+    <section class="py-24 bg-gradient-to-br from-blue-700 to-green-700" data-aos="fade-up">
+        <div class="container mx-auto px-6">
+            <form id="basic-contact-form" action="javascript:void(0);" method="post" class="form-box bg-gradient-to-br from-blue-700 to-green-700 backdrop-blur-lg p-6 sm:p-8 rounded-2xl shadow-2xl border border-white/40 max-w-4xl mx-auto" novalidate>
+                <input type="hidden" name="form_type" value="Basic Contact">
+                <div class="container-block form-wrapper">
+                    <p class="text-2xl sm:text-3xl font-semibold text-yellow-200 mb-4">Get in Touch</p>
+                    <p class="text-white text-sm sm:text-base mb-6">Contact us for a free cash offer today!</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+                        <div>
+                            <p class="text-white text-sm sm:text-base">FIRST NAME</p>
+                            <input class="input w-full p-3 sm:p-4 rounded-lg bg-blue-300 text-black placeholder-gray-700 focus:ring-2 focus:ring-yellow-300" name="seller_f_name" id="contact_seller_f_name" placeholder="Enter first name...*" required>
+                        </div>
+                        <div>
+                            <p class="text-white text-sm sm:text-base">LAST NAME</p>
+                            <input class="input w-full p-3 sm:p-4 rounded-lg bg-blue-300 text-black placeholder-gray-700 focus:ring-2 focus:ring-yellow-300" name="seller_l_name" id="contact_seller_l_name" placeholder="Enter last name...*" required>
+                        </div>
+                        <div>
+                            <p class="text-white text-sm sm:text-base">EMAIL</p>
+                            <input class="input w-full p-3 sm:p-4 rounded-lg bg-blue-300 text-black placeholder-gray-700 focus:ring-2 focus:ring-yellow-300" name="seller_email" id="contact_seller_email" type="email" placeholder="Enter email...*" required>
+                        </div>
+                        <div>
+                            <p class="text-white text-sm sm:text-base">PHONE NUMBER</p>
+                            <input class="input w-full p-3 sm:p-4 rounded-lg bg-blue-300 text-black placeholder-gray-700 focus:ring-2 focus:ring-yellow-300" name="seller_phone" id="contact_seller_phone" placeholder="Enter phone number...*" required>
+                        </div>
+                        <div class="sm:col-span-2">
+                            <p class="text-white text-sm sm:text-base">ASKING PRICE</p>
+                            <input class="input w-full p-3 sm:p-4 rounded-lg bg-blue-300 text-black placeholder-gray-700 focus:ring-2 focus:ring-yellow-300" name="house_market_value" id="contact_house_market_value" placeholder="Enter asking price...*" required>
+                        </div>
+                        <div>
+                            <p class="text-white text-sm sm:text-base mb-2">HOA</p>
+                            <div class="flex items-center space-x-4">
+                                <label class="text-white flex items-center space-x-2">
+                                    <input type="radio" name="hoa_status" value="Yes" class="form-radio text-yellow-300" required>
+                                    <span>Yes</span>
+                                </label>
+                                <label class="text-white flex items-center space-x-2">
+                                    <input type="radio" name="hoa_status" value="No" class="form-radio text-yellow-300">
+                                    <span>No</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-white text-sm sm:text-base mb-2">GATED COMMUNITY</p>
+                            <div class="flex items-center space-x-4">
+                                <label class="text-white flex items-center space-x-2">
+                                    <input type="radio" name="gated_community" value="Yes" class="form-radio text-yellow-300" required>
+                                    <span>Yes</span>
+                                </label>
+                                <label class="text-white flex items-center space-x-2">
+                                    <input type="radio" name="gated_community" value="No" class="form-radio text-yellow-300">
+                                    <span>No</span>
+                                </label>
+                            </div>
                         </div>
                     </div>
-                    <div>
-                        <p class="text-white text-sm sm:text-base mb-2">GATED COMMUNITY</p>
-                        <div class="flex items-center space-x-4">
-                            <label class="text-white flex items-center space-x-2">
-                                <input type="radio" name="gated_community" value="Yes" class="form-radio text-yellow-300" required>
-                                <span>Yes</span>
-                            </label>
-                            <label class="text-white flex items-center space-x-2">
-                                <input type="radio" name="gated_community" value="No" class="form-radio text-yellow-300">
-                                <span>No</span>
-                            </label>
-                        </div>
-                    </div>
+                    <input type="submit" value="Submit" class="w-full bg-yellow-300 text-blue-800 p-3 sm:p-4 rounded-lg hover:bg-yellow-400 hover:scale-105 transition duration-300 font-semibold shadow-md mt-6" />
                 </div>
-                <input type="submit" value="Submit" class="w-full bg-yellow-300 text-blue-800 p-3 sm:p-4 rounded-lg hover:bg-yellow-400 hover:scale-105 transition duration-300 font-semibold shadow-md mt-6" />
-            </div>
-        </form>
-    </div>
-</section>
+            </form>
+        </div>
+    </section>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
+    <!-- Section Divider -->
+    <div class="section-divider"></div>
+
+    <!-- Footer -->
+    <footer class="bg-gradient-to-r from-blue-700 to-green-700 text-white py-8 sm:py-12 relative">
+        <div class="absolute inset-0 bg-gradient-to-r from-blue-700 to-green-700"></div>
+        <div class="container mx-auto px-4 sm:px-6 text-center relative z-10">
+            <p class="text-sm sm:text-lg">© 2025 All rights reserved.</p>
+            <p class="mt-2 sm:mt-4 text-sm sm:text-lg">Contact: <a href="tel:7027932582" class="text-yellow-200 hover:text-yellow-300 transition-colors duration-200">(702) 793-2582</a> | <a href="mailto:info@buyvegashouses.com" class="text-yellow-200 hover:text-yellow-300 transition-colors duration-200">info@buyvegashouses.com</a></p>
+            <p>USA, Nevada, Las Vegas</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script>
+        AOS.init({ duration: 1000 });
+
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when a link is clicked
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Contact form submission
         const contactForm = document.getElementById("basic-contact-form");
         if (contactForm && contactForm.tagName === 'FORM') {
             console.log('Form found: basic-contact-form', contactForm);
@@ -401,31 +408,6 @@
         } else {
             console.warn("Form with ID 'basic-contact-form' not found or not a form element:", contactForm);
         }
-    });
-    </script>
-
-
-    <!-- Section Divider -->
-    <div class="section-divider"></div>
-
-    <!-- Footer -->
-    <footer class="bg-gradient-to-r from-blue-700 to-green-700 text-white py-8 sm:py-12 relative">
-        <div class="absolute inset-0 bg-gradient-to-r from-blue-700 to-green-700"></div>
-        <div class="container mx-auto px-4 sm:px-6 text-center relative z-10">
-            <p class="text-sm sm:text-lg">© 2025 All rights reserved.</p>
-            <p class="mt-2 sm:mt-4 text-sm sm:text-lg">Contact: <a href="tel:7027932582" class="text-yellow-200 hover:text-yellow-300 transition-colors duration-200">(702) 793-2582</a> | <a href="mailto:info@buyvegashouses.com" class="text-yellow-200 hover:text-yellow-300 transition-colors duration-200">info@webuyhousesinvegas.com</a></p>
-            <p>Usa Nevada Las Vegas</p>
-        </div>
-    </footer>
-
-    <!-- Scripts -->
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <script>
-        AOS.init({ duration: 1000 });
-        document.getElementById('menu-toggle').addEventListener('click', function() {
-            document.getElementById('mobile-menu').classList.toggle('hidden');
-        });
     </script>
 </body>
 </html>
